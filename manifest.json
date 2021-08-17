@@ -1,0 +1,18 @@
+{
+  "manifest_version" : 2,
+  "name": "FastOpen",
+  "description": "Extension test",
+  "version": "1.0",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}
