@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <title>FastOpen</title>
 </head>
 <body>
 <div class="imgcontainer">
@@ -11,12 +14,9 @@
 </div>
 <h1>FastOpen</h1>
 <label>URL groups:</label>
-<ul id="groupList">
-    <li><a href="javascript:void(openURLs('work'));">Work</a></li>
-    <li><a href="javascript:void(openURLs('study'));">Study</a></li>
-    <li><a href="javascript:void(openURLs('game'));">Game</a></li>
-</ul>
-<a href="addNewGroup.html" id="addButton">Add</a>
-</body>
+<div id="list"></div>
+<div id="addTextField"></div>
+<button id="addButton" onclick="openTextField()">Add</button>
 <script src="app.js"></script>
+</body>
 </html>

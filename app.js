@@ -1,5 +1,4 @@
-let groups = new Array(10);
-let numOfGroups = 3;
+let listOfGroups = [];
 
 function openURLs(str){
     if(str === "work"){
@@ -16,18 +15,32 @@ function openURLs(str){
     }
 }
 
-function addNewGroup(){
-    numOfGroups++;
-    let name = document.getElementById('group').value;
-    let elt = document.getElementById('groupList');
-    let newList = document.createElement('li');
-    newList.textContent = name;
-    elt.append(newList);
-    window.location.replace('popup.html');
-    let urls = document.getElementById('urls').value;
-    const url = urls.split(" ");
-    url.unshift(name);
-    groups[numOfGroups] = url;
 
-
+function addNewGroup() {
+    let groupName = document.getElementById('group').value;
+    if (groupName != '') {
+        listOfGroups.push(groupName);
+        showGroups();
+    }
 }
+
+function showGroups() {
+    let showInfo = "";
+    for(let i = 0; i < listOfGroups.length; i++) {
+        showInfo += `
+        <li><a href="javascript:void(openURLs('work'));">${listOfGroups[i]}</a></li>
+        `;
+    }
+    document.getElementById('list').innerHTML = showInfo;
+}
+
+function openTextField(){
+    document.getElementById('addTextField').innerHTML = `
+    <label for="group">Group name:</label><br>
+<input type="text" id="group" name="group"><br>
+<label for="urls">URLs:</label><br>
+<textarea id="urls" name="urls" cols="50" rows="4"></textarea><br>
+<button type="button" onclick="void(addNewGroup())">Add</button>
+    `;
+}
+
