@@ -44,9 +44,10 @@ li a{
 
 li a:hover{
     background-color: dimgray;
+    text-decoration: none;
 }
 
-#addButton{
+#addButton, #addbtn{
     font-family: Bahnschrift;
     background-color: cornflowerblue;
     color: aliceblue;
@@ -56,7 +57,7 @@ li a:hover{
     text-decoration: none;
 }
 
-#addButton:hover{
+#addButton, #addbtn:hover{
     background-color: dodgerblue;
 }
 
