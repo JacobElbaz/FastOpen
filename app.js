@@ -9,7 +9,8 @@ window.onload = function () {
 function openURLs(str){
     let index = listOfGroups.indexOf(str);
     for(let i = 0; i<listOfUrls[index].length; i++){
-        window.open(listOfUrls[index][i]);
+        /*window.open(listOfUrls[index][i]);  -- not work as popup html*/
+        chrome.tabs.create({url: listOfUrls[index][i]});
     }
 }
 
@@ -43,14 +44,19 @@ function showGroups() {
     let showInfo = "";
     for(let i = 0; i < listOfGroups.length; i++) {
         showInfo += `
-        <li><a href="javascript:void(openURLs('${listOfGroups[i]}'));">${listOfGroups[i]}</a></li>
+        <li><input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}"></li>
         `;
+        /*<li><a href="javascript:void(openURLs('${listOfGroups[i]}'));">${listOfGroups[i]}</a></li>*/
     }
     document.getElementById('list').innerHTML = showInfo;
+    for(let i = 0; i < listOfGroups.length; i++) {
+        document.getElementById(listOfGroups[i]).addEventListener("click", function(){ openURLs(listOfGroups[i]); });
+    }
     document.getElementById('addTextField').innerHTML = ``;
     document.getElementById('buttonArea').innerHTML = `<input type="button" id="addButton" value="Add">`
     document.getElementById('addButton').addEventListener("click", openTextField);
 }
+
 
 function openTextField(){
     document.getElementById('buttonArea').innerHTML = ``;

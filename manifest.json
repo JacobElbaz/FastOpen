@@ -16,6 +16,8 @@
     "128": "icon.png"
   },
   "background": {
-    "scripts": ["app.js"]
-  }
+    "scripts": ["app.js"],
+    "persistent": false
+  },
+  "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"
 }
