@@ -1,21 +1,36 @@
 let listOfGroups = [];
+console.log('set list');
 let listOfUrls = [];
+chrome.storage.sync.get(['ListOfGroups'], function (result){
+    if(result.ListOfGroups != null){
+        listOfGroups = result.ListOfGroups;
+
+        console.log('get run');}
+});
+chrome.storage.sync.get(['ListOfUrls'], function (res){
+    if(res.ListOfUrls != null){
+        listOfUrls = res.ListOfUrls;}
+});
 
 window.onload = function () {
+    console.log('add button');
     let button = document.getElementById('addButton');
     button.addEventListener("click", openTextField);
+    document.getElementById("refresh").addEventListener("click", showGroups);
+    console.log('finish add button');
 }
 
 function openURLs(str){
+    console.log('openURLs');
     let index = listOfGroups.indexOf(str);
     for(let i = 0; i<listOfUrls[index].length; i++){
-        /*window.open(listOfUrls[index][i]);  -- not work as popup html*/
         chrome.tabs.create({url: listOfUrls[index][i]});
     }
 }
 
 
 function addNewGroup() {
+    console.log('addNewGroup');
     let groupName = document.getElementById('group').value;
     listOfUrls[listOfGroups.length] = [];
     let url1 = document.getElementById('url1').value;
@@ -36,21 +51,37 @@ function addNewGroup() {
     }
     if (groupName != '') {
         listOfGroups.push(groupName);
+        chrome.storage.sync.set({'ListOfGroups': listOfGroups});
+        chrome.storage.sync.set({'ListOfUrls': listOfUrls});
         showGroups();
     }
 }
 
+function removeGroup(index){
+    listOfGroups.splice(parseInt(index), 1);
+    listOfUrls.splice(parseInt(index), 1);
+    chrome.storage.sync.set({'ListOfGroups': listOfGroups});
+    chrome.storage.sync.set({'ListOfUrls': listOfUrls});
+    showGroups();
+}
+
 function showGroups() {
+    console.log('showGroups');
     let showInfo = "";
     for(let i = 0; i < listOfGroups.length; i++) {
         showInfo += `
-        <li><input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}"></li>
+        <li>
+        <span id="in">
+        <input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}">
+        </span>
+        <span id="X"><button class="btn btn-danger" id="${i}">X</button></span>
+        </li>
         `;
-        /*<li><a href="javascript:void(openURLs('${listOfGroups[i]}'));">${listOfGroups[i]}</a></li>*/
     }
     document.getElementById('list').innerHTML = showInfo;
     for(let i = 0; i < listOfGroups.length; i++) {
         document.getElementById(listOfGroups[i]).addEventListener("click", function(){ openURLs(listOfGroups[i]); });
+        document.getElementById(i.toString()).addEventListener("click", function (){removeGroup(i);});
     }
     document.getElementById('addTextField').innerHTML = ``;
     document.getElementById('buttonArea').innerHTML = `<input type="button" id="addButton" value="Add">`
@@ -59,6 +90,7 @@ function showGroups() {
 
 
 function openTextField(){
+    console.log('openTextField');
     document.getElementById('buttonArea').innerHTML = ``;
     document.getElementById('addTextField').innerHTML = `
 <div id="textt">
