@@ -1,6 +1,14 @@
 let listOfGroups = [];
 console.log('set list');
 let listOfUrls = [];
+
+
+let tabs = {};
+let tabIds = [];
+
+let focusedWindowId = undefined;
+let currentWindowId = undefined;
+
 chrome.storage.sync.get(['ListOfGroups'], function (result){
     if(result.ListOfGroups != null){
         listOfGroups = result.ListOfGroups;
@@ -20,12 +28,43 @@ window.onload = function () {
     console.log('finish add button');
 }
 
-function openURLs(str){
+
+function openURLs(str) {
     console.log('openURLs');
     let index = listOfGroups.indexOf(str);
-    for(let i = 0; i<listOfUrls[index].length; i++){
+    for (let i = 0; i < listOfUrls[index].length; i++) {
         chrome.tabs.create({url: listOfUrls[index][i]});
     }
+    bootStrap();
+    chrome.tabs.group({tabIds: tabIds});
+}
+
+
+function bootStrap() {
+    console.log('bootStrap');
+    chrome.windows.getCurrent(function (currentWindow) {
+        currentWindowId = currentWindow.id;
+        chrome.windows.getLastFocused(function (focusedWindow) {
+            focusedWindowId = focusedWindow.id;
+            loadWindowList();
+        });
+    });
+}
+
+function loadWindowList() {
+    chrome.windows.getAll({populate: true}, function (windowList) {
+        tabs = {};
+        tabIds = [];
+        for (var i = 0; i < windowList.length; i++) {
+            windowList[i].current = (windowList[i].id == currentWindowId);
+            windowList[i].focused = (windowList[i].id == focusedWindowId);
+
+            for (var j = 0; j < windowList[i].tabs.length; j++) {
+                tabIds[tabIds.length] = windowList[i].tabs[j].id;
+                tabs[windowList[i].tabs[j].id] = windowList[i].tabs[j];
+            }
+        }
+    });
 }
 
 
