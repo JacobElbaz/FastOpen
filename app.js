@@ -21,11 +21,7 @@ chrome.storage.sync.get(['ListOfUrls'], function (res){
 });
 
 window.onload = function () {
-    console.log('add button');
-    let button = document.getElementById('addButton');
-    button.addEventListener("click", openTextField);
     document.getElementById("refresh").addEventListener("click", showGroups);
-    console.log('finish add button');
 }
 
 
@@ -106,6 +102,7 @@ function removeGroup(index){
 
 function editGroup(index) {
     console.log('editGroup');
+    document.getElementById('buttonArea').innerHTML = ``;
     let toEdit = document.getElementById('addTextField');
     toEdit.innerHTML = `
 <div id="textt">
@@ -156,17 +153,19 @@ function openTextField(){
     document.getElementById('addTextField').innerHTML = `
 <div id="textt">
     <label for="group">Group name:</label><br>
-<input type="text" placeholder="Name" id="group" name="group"><br>
+<input type="text" class="form-control" placeholder="Name" id="group" name="group"><br>
 <label for="url1">URLs:</label><br>
-<input type="text" placeholder="Url 1" id="url1" name="url1"><br>
-<input type="text" placeholder="Url 2" id="url2" name="url2"><br>
-<input type="text" placeholder="Url 3" id="url3" name="url3"><br>
-<input type="text" placeholder="Url 4" id="url4" name="url4"><br>
+<input type="text" class="form-control" placeholder="Url 1" id="url1" name="url1"><br>
+<input type="text" class="form-control" placeholder="Url 2" id="url2" name="url2"><br>
+<input type="text" class="form-control" placeholder="Url 3" id="url3" name="url3"><br>
+<input type="text" class="form-control" placeholder="Url 4" id="url4" name="url4"><br>
 <input type="button" id="addbtn" value="Add">
+<input type="button" id="cancel" value="Cancel">
 </div>
     `;
     document.getElementById('addbtn').addEventListener("click", function () {
         addNewGroup(listOfGroups.length);
     });
+    document.getElementById('cancel').addEventListener("click", showGroups);
 }
 

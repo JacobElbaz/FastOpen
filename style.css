@@ -132,3 +132,9 @@ footer{
     color: dimgray;
     text-align: center;
 }
+
+.form-control{
+    width: 75%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
