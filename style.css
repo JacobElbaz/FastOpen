@@ -1,7 +1,6 @@
 body{
     background-color: #353332;
     padding-top: 15px;
-    padding-bottom: 5em;
     min-width: 300px;
     overflow-x: hidden;
 }
@@ -41,7 +40,7 @@ ul {
     padding: 15px;
     width: 85%;
     background-color: #4444;
-    margin: 0 0 0 0;
+    margin: 0;
 }
 
 li input{
@@ -50,9 +49,14 @@ li input{
     text-decoration: none;
     border: none;
     padding: 15px;
-    width: 60%;
+    width: 65%;
     background-color: #4444;
-    margin: 0 0 0 0;
+    margin: 0;
+}
+
+.btn{
+    margin:0;
+    position: center;
 }
 
 li input:hover{
@@ -94,6 +98,23 @@ input{
     box-sizing: border-box;
 }
 
+.delete-btn{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    margin: 0;
+    padding: 8px;
+    color: black;
+}
+
+.delete-btn:hover{
+    color: aliceblue;
+    background-color: transparent;
+}
+
 #urls{
     width: 75%;
     margin: auto 8px 8px 40px;
@@ -106,10 +127,8 @@ input{
 }
 
 footer{
-    position: absolute;
     bottom: 0;
     width: 100%;
     color: dimgray;
     text-align: center;
-    background-color: #2C2B2B;
 }

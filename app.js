@@ -68,28 +68,28 @@ function loadWindowList() {
 }
 
 
-function addNewGroup() {
+function addNewGroup(index) {
     console.log('addNewGroup');
     let groupName = document.getElementById('group').value;
-    listOfUrls[listOfGroups.length] = [];
+    listOfUrls[index] = [];
     let url1 = document.getElementById('url1').value;
-    if(url1 != ''){
-        listOfUrls[listOfGroups.length].push(url1);
+    if(url1 != '' && url1 != 'undefined'){
+        listOfUrls[index].push(url1);
     }
     let url2 = document.getElementById('url2').value;
-    if(url2 != ''){
-        listOfUrls[listOfGroups.length].push(url2);
+    if(url2 != '' && url2 != 'undefined'){
+        listOfUrls[index].push(url2);
     }
     let url3 = document.getElementById('url3').value;
-    if(url3 != ''){
-        listOfUrls[listOfGroups.length].push(url3);
+    if(url3 != '' && url3 != 'undefined'){
+        listOfUrls[index].push(url3);
     }
     let url4 = document.getElementById('url4').value;
-    if(url4 != ''){
-        listOfUrls[listOfGroups.length].push(url4);
+    if(url4 != '' && url4 != 'undefined'){
+        listOfUrls[index].push(url4);
     }
     if (groupName != '') {
-        listOfGroups.push(groupName);
+        listOfGroups[index] = groupName;
         chrome.storage.sync.set({'ListOfGroups': listOfGroups});
         chrome.storage.sync.set({'ListOfUrls': listOfUrls});
         showGroups();
@@ -104,16 +104,37 @@ function removeGroup(index){
     showGroups();
 }
 
+function editGroup(index) {
+    console.log('editGroup');
+    let toEdit = document.getElementById('addTextField');
+    toEdit.innerHTML = `
+<div id="textt">
+    <label for="group">Group name:</label><br>
+<input type="text" value="${listOfGroups[index]}" id="group" name="group"><br>
+<label for="url1">URLs:</label><br>
+<input type="text" value="${listOfUrls[index][0]}" id="url1" name="url1"><br>
+<input type="text" value="${listOfUrls[index][1]}" id="url2" name="url2"><br>
+<input type="text" value="${listOfUrls[index][2]}" id="url3" name="url3"><br>
+<input type="text" value="${listOfUrls[index][3]}" id="url4" name="url4"><br>
+<input type="button" id="addbtn" value="Edit">
+</div>
+    `;
+    document.getElementById("addbtn").addEventListener("click", function (){
+        addNewGroup(index);
+    })
+}
+
 function showGroups() {
     console.log('showGroups');
     let showInfo = "";
     for(let i = 0; i < listOfGroups.length; i++) {
         showInfo += `
         <li>
-        <span id="in">
+        <span id="buttons">
         <input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}">
+        <button class="btn btn-secondary btn-sm" id="${i}edit">Edit</button>
+        <button class="delete-btn" id="${i}">x</button>
         </span>
-        <span id="X"><button class="btn btn-danger" id="${i}">X</button></span>
         </li>
         `;
     }
@@ -121,6 +142,7 @@ function showGroups() {
     for(let i = 0; i < listOfGroups.length; i++) {
         document.getElementById(listOfGroups[i]).addEventListener("click", function(){ openURLs(listOfGroups[i]); });
         document.getElementById(i.toString()).addEventListener("click", function (){removeGroup(i);});
+        document.getElementById(i.toString() + 'edit').addEventListener("click", function (){editGroup(i);});
     }
     document.getElementById('addTextField').innerHTML = ``;
     document.getElementById('buttonArea').innerHTML = `<input type="button" id="addButton" value="Add">`
@@ -143,6 +165,8 @@ function openTextField(){
 <input type="button" id="addbtn" value="Add">
 </div>
     `;
-    document.getElementById('addbtn').addEventListener("click", addNewGroup);
+    document.getElementById('addbtn').addEventListener("click", function () {
+        addNewGroup(listOfGroups.length);
+    });
 }
 
