@@ -31,8 +31,6 @@ function openURLs(str) {
     for (let i = 0; i < listOfUrls[index].length; i++) {
         chrome.tabs.create({url: listOfUrls[index][i]});
     }
-    bootStrap();
-    chrome.tabs.group({tabIds: tabIds});
 }
 
 
