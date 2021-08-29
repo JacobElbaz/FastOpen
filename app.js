@@ -121,6 +121,12 @@ function editGroup(index) {
     })
 }
 
+function newWindow(str){
+    console.log('newWindow');
+    let index = listOfGroups.indexOf(str);
+    chrome.windows.create({url: listOfUrls[index]});
+}
+
 function showGroups() {
     console.log('showGroups');
     let showInfo = "";
@@ -129,6 +135,7 @@ function showGroups() {
         <li>
         <span id="buttons">
         <input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}">
+        <button title="Open in a new window" class="delete-btn" id="${i}open"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></button>
         <button title="Edit" class="delete-btn" id="${i}edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         <button title="Delete" class="delete-btn" id="${i}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         </span>
@@ -140,6 +147,7 @@ function showGroups() {
         document.getElementById(listOfGroups[i]).addEventListener("click", function(){ openURLs(listOfGroups[i]); });
         document.getElementById(i.toString()).addEventListener("click", function (){removeGroup(i);});
         document.getElementById(i.toString() + 'edit').addEventListener("click", function (){editGroup(i);});
+        document.getElementById(i.toString() + 'open').addEventListener("click", function (){newWindow(listOfGroups[i]);});
     }
     document.getElementById('addTextField').innerHTML = ``;
     document.getElementById('buttonArea').innerHTML = `<input type="button" id="addButton" value="Add">`

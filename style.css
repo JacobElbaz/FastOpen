@@ -5,6 +5,10 @@ body{
     overflow-x: hidden;
 }
 
+.dropdown{
+    position: relative;
+}
+
 .imgcontainer{
     text-align: center;
     margin: 12px 0 12px 0;
@@ -49,7 +53,7 @@ li input{
     text-decoration: none;
     border: none;
     padding: 15px;
-    width: 65%;
+    width: 60%;
     background-color: #4444;
     margin: 0;
 }
