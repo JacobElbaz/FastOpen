@@ -129,8 +129,8 @@ function showGroups() {
         <li>
         <span id="buttons">
         <input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}">
-        <button class="btn btn-secondary btn-sm" id="${i}edit">Edit</button>
-        <button class="delete-btn" id="${i}">x</button>
+        <button title="Edit" class="delete-btn" id="${i}edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <button title="Delete" class="delete-btn" id="${i}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         </span>
         </li>
         `;
