@@ -84,7 +84,7 @@ li:hover{
 
 #addButton, #addbtn{
     font-family: Bahnschrift;
-    background-color: cornflowerblue;
+    background-color: dodgerblue;
     color: aliceblue;
     border: none;
     margin: auto 8px 8px 40px;
@@ -92,8 +92,8 @@ li:hover{
     text-decoration: none;
 }
 
-#addButton, #addbtn:hover{
-    background-color: dodgerblue;
+#addButton:hover, #addbtn:hover{
+    background-color: royalblue;
 }
 
 button{

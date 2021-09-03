@@ -173,8 +173,32 @@ function openTextField(){
 </div>
     `;
     document.getElementById('addbtn').addEventListener("click", function () {
-        addNewGroup(listOfGroups.length);
+        let flag = true;
+        let container = document.createElement("label");
+        container.textContent = "Invalid Url";
+        container.style.color = 'red';
+        for(let i = 1; i<5; i++){
+            let url = document.getElementById('url'+i.toString());
+            if(!validURL(url.value) && url.value != undefined && url.value != '' ){
+                flag=false;
+                url.style.borderColor = 'red';
+                url.before(container);
+            }
+        }
+        if(flag) {
+            addNewGroup(listOfGroups.length);
+        }
     });
     document.getElementById('cancel').addEventListener("click", showGroups);
+}
+
+function validURL(str) {
+    let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
 }
 
