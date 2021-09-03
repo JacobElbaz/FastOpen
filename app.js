@@ -112,11 +112,14 @@ function editGroup(index) {
 <input type="text" value="${listOfUrls[index][2]}" id="url3" name="url3"><br>
 <input type="text" value="${listOfUrls[index][3]}" id="url4" name="url4"><br>
 <input type="button" id="addbtn" value="Edit">
+<input type="button" id="back" value="Back">
 </div>
     `;
+    document.getElementById('list'+index.toString()).style.background = 'dimgray';
     document.getElementById("addbtn").addEventListener("click", function (){
         addNewGroup(index);
-    })
+    });
+    document.getElementById('back').addEventListener("click", showGroups);
 }
 
 function newWindow(str){
@@ -130,7 +133,7 @@ function showGroups() {
     let showInfo = "";
     for(let i = 0; i < listOfGroups.length; i++) {
         showInfo += `
-        <li>
+        <li id="list${i}">
         <span id="buttons">
         <input type="button" class="urlGroup" id="${listOfGroups[i]}" value="${listOfGroups[i]}">
         <button title="Open in a new window" class="delete-btn" id="${i}open"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></button>

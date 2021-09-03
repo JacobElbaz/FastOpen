@@ -47,6 +47,10 @@ ul {
     margin: 0;
 }
 
+#refresh:hover{
+    background-color: dimgray;
+}
+
 li{
     font-family: Bahnschrift;
     color: aliceblue;
@@ -121,7 +125,7 @@ input{
     outline: none;
     margin: 0;
     padding: 5px;
-    color: black;
+    color: #353332;
 }
 
 .delete-btn:hover{
