@@ -21,7 +21,7 @@ chrome.storage.sync.get(['ListOfUrls'], function (res){
 });
 
 window.onload = function () {
-    document.getElementById("refresh").addEventListener("click", showGroups);
+    showGroups();
 }
 
 
