@@ -131,6 +131,9 @@ function newWindow(str){
 function showGroups() {
     console.log('showGroups');
     let showInfo = "";
+    if(listOfGroups.length < 1){
+        showInfo = `<p class="NoItem">Press "Add" to add a new Url group</p>`
+    }
     for(let i = 0; i < listOfGroups.length; i++) {
         showInfo += `
         <li id="list${i}">

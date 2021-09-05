@@ -9,6 +9,11 @@ body{
     position: relative;
 }
 
+.NoItem{
+    font-family: Bahnschrift;
+    color: dimgray;
+}
+
 .imgcontainer{
     text-align: center;
     margin: 12px 0 12px 0;
